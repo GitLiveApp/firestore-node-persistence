@@ -21,7 +21,7 @@ import { EncodedBounds } from './key_range';
 import type { NodeIDBObjectStore } from './object_store';
 import { deserializeValue } from './value_serializer';
 
-import type { NodeIDBIndex } from './index';
+import type { NodeIDBIndex } from './idb_index';
 
 /**
  * Minimal IDBCursor / IDBCursorWithValue implementation.

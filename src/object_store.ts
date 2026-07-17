@@ -30,7 +30,7 @@ import {
 import type { NodeIDBTransaction } from './transaction';
 import { deserializeValue, serializeValue } from './value_serializer';
 
-import { NodeIDBIndex } from './index';
+import { NodeIDBIndex } from './idb_index';
 
 /**
  * Minimal IDBObjectStore implementation over a SQLite table.
