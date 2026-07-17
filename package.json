@@ -1,0 +1,29 @@
+{
+  "name": "@gitlive/firestore-node-persistence",
+  "version": "0.1.0",
+  "description": "Firestore persistent local cache for Node.js: a minimal SQLite-backed IndexedDB adapter that enables persistentLocalCache() in the stock firebase SDK at runtime.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GitLiveApp/firestore-node-persistence.git"
+  },
+  "main": "dist/register.js",
+  "types": "dist/register.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test --disable-warning=ExperimentalWarning \"test/*.test.js\""
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "firebase": "^12.0.0",
+    "typescript": "^5.5.0"
+  }
+}
