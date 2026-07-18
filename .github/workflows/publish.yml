@@ -1,5 +1,23 @@
 name: Publish to npm
 
+# Uses npm Trusted Publishing (OIDC): no npm token or secret is required.
+#
+# One-time setup:
+# 1. The package must already exist on npmjs.com — npm only lets you
+#    configure a trusted publisher for an existing package, so perform the
+#    FIRST publish manually (`npm publish --access public` locally with OTP,
+#    or once via a granular access token).
+# 2. On npmjs.com -> package -> Settings -> Trusted Publisher, add:
+#    GitHub Actions, repository GitLiveApp/firestore-node-persistence,
+#    workflow file publish.yml.
+# 3. (Recommended) Set the package's publishing access to
+#    "Require two-factor authentication and disallow tokens" — trusted
+#    publishing is exempt, so CI keeps working while stolen tokens are
+#    useless.
+#
+# Provenance attestations are generated automatically when publishing via
+# trusted publishing (no --provenance flag needed).
+
 on:
   release:
     types: [published]
@@ -7,7 +25,7 @@ on:
 
 permissions:
   contents: read
-  # Required for npm --provenance attestation.
+  # Required for OIDC (trusted publishing).
   id-token: write
 
 jobs:
@@ -20,8 +38,8 @@ jobs:
           node-version: 22.x
           cache: npm
           registry-url: 'https://registry.npmjs.org'
+      # Trusted publishing requires npm CLI >= 11.5.1; Node 22 bundles npm 10.
+      - run: npm install -g npm@latest
       - run: npm ci
       - run: npm test
-      - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm publish --access public
