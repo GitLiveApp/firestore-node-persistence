@@ -19,7 +19,8 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "npm run build && node --test --disable-warning=ExperimentalWarning \"test/*.test.js\""
+    "test": "npm run build && node --test --disable-warning=ExperimentalWarning \"test/*.test.js\"",
+    "prepack": "npm run build"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
